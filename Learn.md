@@ -1,0 +1,17 @@
+# Haskell
+- Haskell is a purely functional language
+- Haskell has type inference
+- Haskell is elegant and concise
+- ' is its own charcter, doesnt mean anything 
+- instead of putting ++, use : at beginning 5:[1,2] -> [5,1,2] (only allowed to do one element)
+- [1,2,3] = 1:2:3:[]
+- !! is for 0 indexed index lookup '"hello"!! 0' -> h
+- Lists are compared in lexicographical order
+- For lists, head, tail, last, init
+- head, tail, last, init
+- length, null, reverse, (take, drop), maximum, minimum, sum, product, elem
+- Haskell is lazy 'take 24 [13,26..]' gives first 24 multiples of 24 instead of calculating infinite
+- Cycle, repeat are most used with take:
+    - take 10 (repeat 5)
+    - take 10 (cycle [1,2,3]) # This is for decronstructing list and getting the same patterns
+- Can use set ideas [x | x <- [50..100], mod x 7 == 3] for example
