@@ -1,3 +1,10 @@
+import Data.List (nub, sort)
+import Data.List hiding (nub)
+
+-- When you have same name functions to avoid accidental functions:
+import qualified Data.Map 
+
+
 doubleMe x = x + x
 doubleUs x y = x*2 + y*2
 doubleSmallNumber x = (if x <= 100 then x*2 else x) + 1
@@ -39,9 +46,9 @@ length' [x] = 1
 length' (x:y) = 1 + length' y  
 
 -- Sum using recursion
-sum' :: (Integral a) => [a] -> a
-sum' [] = 0
-sum' (x:xs) = x + sum' xs
+-- sum' :: (Integral a) => [a] -> a
+-- sum' [] = 0
+-- sum' (x:xs) = x + sum' xs
 
 -- Patterns
 capital :: String -> String
@@ -173,3 +180,41 @@ numLongChains = sum [1 | x <- [1..100], length (chain x) > 15]
 numLongChains' :: Int  
 numLongChains' = length (filter isLong (map chain [1..100]))  
     where isLong xs = length xs > 15  
+
+largestDivisible :: (Integral a) => a
+largestDivisible = head (filter p [100000,99999..1])
+    where p x = mod x 3829 == 0
+
+
+sum' :: (Num a) => [a] -> a
+sum' xs = foldr (\x acc -> acc + x) 0 xs
+
+-- findkey' :: (Eq a) => a -> [(a,b)] -> b
+-- findkey' key xs = snd . head . filter (\(k,v) -> key == k) xs
+
+-- findkey' :: (Eq a) => a -> [(a,b)] -> Maybe b
+-- findkey' key [] = Nothing
+-- findkey' key ((k, v):xs)
+--     | key == k = Just v
+--     | otherwise = findkey' key xs
+
+findkey' :: (Eq a) => a -> [(a,b)] -> Maybe b
+findkey' key xs = foldr (\(k,v) acc -> if key == k then Just v else acc) Nothing xs
+
+data Point = Point Float Float deriving (Show)
+data Shape = Circle Point Float | Rectangle Point Point deriving (Show)
+
+surface :: Shape -> Float
+surface (Circle _ r) = pi * r ^ 2
+surface (Rectangle (Point x1 y1) (Point x2 y2)) = (abs $ x2 - x1) * (abs $ y2 - y1)
+
+data Person = Person {
+    firstName :: String
+    , lastName :: String
+    , age :: Int
+    , height :: Float
+    , phoneNumber :: String
+    , flavor :: String
+} deriving (Show)
+
+data List a = Empty | Cons { listHead :: a, listTail :: List a} deriving (Show, Read, Eq, Ord)  
